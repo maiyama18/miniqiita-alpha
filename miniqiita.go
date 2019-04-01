@@ -72,9 +72,9 @@ func (c *Client) GetUserItems(ctx context.Context, userID string, page, perPage 
 		return nil, errors.New("bad request. some parameters may be invalid")
 	case http.StatusNotFound:
 		return nil, fmt.Errorf("not found. user with id '%s' may not exist", userID)
+	default:
+		return nil, fmt.Errorf("unexpected error")
 	}
-
-	return nil, nil
 }
 
 func (c *Client) newRequest(ctx context.Context, method, relativePath string, queries, headers map[string]string, reqBody io.Reader) (*http.Request, error) {

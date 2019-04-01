@@ -1,6 +1,7 @@
 package miniqiita
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"net/url"
@@ -30,4 +31,19 @@ func New(rawBaseURL, token string, logger *log.Logger) (*Client, error) {
 		Token:      token,
 		Logger:     logger,
 	}, nil
+}
+
+// Item represents an article published on qiita.com
+type Item struct {
+	ID         string `json:"id"`
+	Title      string `json:"title"`
+	LikesCount int    `json:"likes_count"`
+}
+
+// GetUserItems returns items created by the user with provided userID
+//
+// GET /api/v2/users/:user_id/items
+// https://qiita.com/api/v2/docs#get-apiv2usersuser_iditems
+func (c *Client) GetUserItems(ctx context.Context, userID string, page, perPage int) ([]*Item, error) {
+	return nil, nil
 }
